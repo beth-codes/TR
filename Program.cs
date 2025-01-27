@@ -103,11 +103,11 @@ builder.Services.AddCors(options =>
 builder.Services.AddSignalR();
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+// }
 
 // Prevent Caching of Sensitive Pages 
 app.Use(async (context, next) =>
