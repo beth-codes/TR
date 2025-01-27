@@ -126,6 +126,8 @@ app.MapHub<ChatHub>("/chat");
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseStaticFiles();
+
 app.MapControllers();
 app.MapGet("/", () => Results.Text("API is running. Visit `/swagger` for documentation."));
 
