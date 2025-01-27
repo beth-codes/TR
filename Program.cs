@@ -127,6 +127,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGet("/", () => Results.Text("API is running. Visit `/swagger` for documentation."));
 
 using(var scope = app.Services.CreateScope())
 {
