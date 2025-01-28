@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin/Release/net8.0/publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/55c6bfd9-b8e5-496f-ba1a-ebf576b5ce86/resourceGroups/tr_group/providers/Microsoft.Web/sites/MyTaskManagerApp2025"
+}
