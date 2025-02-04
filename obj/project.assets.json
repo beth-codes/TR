@@ -1522,11 +1522,11 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "System.IdentityModel.Tokens.Jwt/7.4.0": {
+      "System.IdentityModel.Tokens.Jwt/7.1.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.IdentityModel.JsonWebTokens": "7.4.0",
-          "Microsoft.IdentityModel.Tokens": "7.4.0"
+          "Microsoft.IdentityModel.JsonWebTokens": "7.1.2",
+          "Microsoft.IdentityModel.Tokens": "7.1.2"
         },
         "compile": {
           "lib/net8.0/System.IdentityModel.Tokens.Jwt.dll": {
@@ -4350,10 +4350,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.IdentityModel.Tokens.Jwt/7.4.0": {
-      "sha512": "9XayJBAY+Bs7+ISFJ6BXJuCf6q9DyP8rsn/D1uNaKHDLyADjeKLRDa5YbFRfSBo/+8cuMzlD2VIUR4VuAPoK7w==",
+    "System.IdentityModel.Tokens.Jwt/7.1.2": {
+      "sha512": "Thhbe1peAmtSBFaV/ohtykXiZSOkx59Da44hvtWfIMFofDA3M3LaVyjstACf2rKGn4dEDR2cUpRAZ0Xs/zB+7Q==",
       "type": "package",
-      "path": "system.identitymodel.tokens.jwt/7.4.0",
+      "path": "system.identitymodel.tokens.jwt/7.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4369,7 +4369,7 @@
         "lib/net8.0/System.IdentityModel.Tokens.Jwt.xml",
         "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.dll",
         "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.xml",
-        "system.identitymodel.tokens.jwt.7.4.0.nupkg.sha512",
+        "system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512",
         "system.identitymodel.tokens.jwt.nuspec"
       ]
     },
@@ -5418,7 +5418,7 @@
       "MySql.EntityFrameworkCore >= 8.0.0",
       "Stripe.net >= 47.1.0",
       "Swashbuckle.AspNetCore >= 7.0.0",
-      "System.IdentityModel.Tokens.Jwt >= 7.4.0"
+      "System.IdentityModel.Tokens.Jwt >= 7.1.2"
     ]
   },
   "packageFolders": {
@@ -5512,7 +5512,7 @@
           },
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",
-            "version": "[7.4.0, )"
+            "version": "[7.1.2, )"
           }
         },
         "imports": [
