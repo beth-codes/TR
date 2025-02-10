@@ -305,5 +305,27 @@ public class UserController : ControllerBase
         return Ok(tasks);
     }
 
+
+    [HttpDelete("task/{taskId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DeleteTaskByIdAsync(int taskId)
+    {
+        try
+        {
+            await _userServices.DeleteTaskByIdAsync(taskId);
+            return Ok("Task deleted successfully.");
+        }
+        catch (ArgumentException)
+        {
+            return NotFound("Task not found.");
+        }
+        catch (InvalidOperationException ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
 }
 

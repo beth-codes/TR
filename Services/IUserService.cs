@@ -8,5 +8,6 @@ public interface IUserService
     Task<List<TaskerProfile>> GetAllTaskers();
     Task<int> TotalCountOfUsers();
     Task DeleteUserByIdAsync(string userId);
+    Task DeleteTaskByIdAsync(int taskId);
     Task<User> GetUserByIdAsync(string userId);
 }

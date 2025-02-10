@@ -1,8 +1,6 @@
 using Stripe.Checkout;
-using PetProjectOne.Models;
-using PetProjectOne.Services; 
+using PetProjectOne.Services;
 using PetProjectOne.Entities;
-using PetProjectOne.Db;
 
 public class PaymentService : IPaymentService
 {
@@ -45,19 +43,5 @@ public class PaymentService : IPaymentService
         var service = new SessionService();
         return await service.CreateAsync(options);
     }
-
-//    public async Task HandlePostPaymentActions(int taskId, int assignedToId)
-//     {
-//         var task = await _dbContex.Tasks.FindAsync(taskId);
-//         if (task == null)
-//         {
-//             throw new Exception("Task not found!");
-//         }
-
-//         // Update the task with the assigned tasker
-//         task.AssignedToId = assignedToId;
-
-//         await _dbContex.SaveChangesAsync();
-//     }
 
 }

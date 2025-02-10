@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PetProjectOne.Entities;
 using PetProjectOne.Db;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace PetProjectOne.Services
 {
@@ -46,6 +47,7 @@ namespace PetProjectOne.Services
             return user;
         }
 
+        // Delete  user by id  
         public async Task DeleteUserByIdAsync(string userId)
         {
            var user = await _userManager.FindByIdAsync(userId);
@@ -60,6 +62,26 @@ namespace PetProjectOne.Services
                 throw new InvalidOperationException($"Error deleting user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
             }
             
-        }   
+        }  
+
+        // Delete  booked task by id 
+       public async Task DeleteTaskByIdAsync(int taskId)
+        {
+            var task = await _dbContext.Tasks.FindAsync(taskId);
+            
+            if (task == null)
+            {
+                throw new ArgumentException($"Task with ID {taskId} not found.");
+            }
+
+            _dbContext.Tasks.Remove(task);
+            var result = await _dbContext.SaveChangesAsync();
+
+            if (result == 0)
+            {
+                throw new InvalidOperationException($"Error deleting task with ID {taskId}.");
+            }
+        }
+
     }
 }

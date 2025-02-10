@@ -7,11 +7,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
-using PetProjectOne.Hubs;
-using MySql.EntityFrameworkCore.Extensions;
-using Microsoft.AspNetCore.Session;
-using Microsoft.Extensions.Caching.Memory;
-
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -133,8 +128,6 @@ app.Use(async (context, next) =>
 
 app.UseCors("AllowAll");
 app.UseHttpsRedirection();
-
-app.MapHub<ChatHub>("/chat");
 
 app.UseAuthentication();
 app.UseAuthorization();
