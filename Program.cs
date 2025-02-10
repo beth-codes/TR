@@ -23,16 +23,6 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddDistributedMemoryCache();
-
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromHours(1);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
-
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -101,21 +91,19 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll",
         b =>
         {
-            b.WithOrigins("http://127.0.0.1:5500")
+            b.WithOrigins("https://api-front-git-main-beth-codes-projects.vercel.app")
                 .AllowAnyHeader()
                 .AllowCredentials()
                 .AllowAnyMethod();
         });
 });
 
+
 builder.Services.AddSignalR();
 var app = builder.Build();
 
-// if (app.Environment.IsDevelopment())
-// {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-// }
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // Prevent Caching of Sensitive Pages 
 app.Use(async (context, next) =>
@@ -131,8 +119,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseSession();
 
 app.UseStaticFiles();
 
