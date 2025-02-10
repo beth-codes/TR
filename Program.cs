@@ -9,6 +9,9 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using PetProjectOne.Hubs;
 using MySql.EntityFrameworkCore.Extensions;
+using Microsoft.AspNetCore.Session;
+using Microsoft.Extensions.Caching.Memory;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -24,6 +27,16 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(1);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -125,6 +138,8 @@ app.MapHub<ChatHub>("/chat");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.UseStaticFiles();
 

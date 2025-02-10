@@ -57,6 +57,10 @@ public class TaskServices : ITaskServices
     {
         return await _dbContex.Tasks.ToListAsync();
     }
+    public async Task<List<TaskRequest>> GetActiveTasks()
+    {
+        return await _dbContex.Tasks.Where(x=>!string.IsNullOrEmpty(x.AssignedToId)).ToListAsync();
+    }
 
 
 

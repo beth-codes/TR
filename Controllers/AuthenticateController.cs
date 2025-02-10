@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetProjectOne.Entities;
 using System.Security.Claims;
 using PetProjectOne.Db;
+using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 
 namespace PetProjectOne.Controllers;
@@ -191,7 +192,6 @@ public class UserController : ControllerBase
             return BadRequest("Invalid request data");
         }
 
-        // Ensure the category exists in the database
         var category = _context.Category.Find(task.CategoryId);
         if (category == null)
         {
@@ -271,7 +271,7 @@ public class UserController : ControllerBase
     }
 
 
-
+    // get all tasks
     [HttpGet("tasks")]
     public async Task<IActionResult> GetAllTasks()
     {
@@ -288,6 +288,22 @@ public class UserController : ControllerBase
         return Ok(tasks);
     }
 
+    // Get active tasks
+    [HttpGet("active-tasks")]
+    public async Task<IActionResult> GetActiveTasks()
+    {
+        // Retrieve all tasks from the database
+        var tasks = await _taskServices.GetActiveTasks();
+
+        // Check if tasks exist, if not return a Not Found response
+        if (tasks == null || !tasks.Any())
+        {
+            return NotFound("No tasks found.");
+        }
+
+        // Return the tasks as a response
+        return Ok(tasks);
+    }
 
 }
 
