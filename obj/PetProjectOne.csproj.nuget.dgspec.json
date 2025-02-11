@@ -13,7 +13,6 @@
         "packagesPath": "C:\\Users\\Emmanuel.Imion\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Emmanuel.Imion\\Documents\\TR\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\Emmanuel.Imion\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
@@ -77,6 +76,10 @@
             "Microsoft.IdentityModel.JsonWebTokens": {
               "target": "Package",
               "version": "[7.4.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.7, )"
             },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
