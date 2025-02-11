@@ -91,13 +91,15 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll",
         b =>
         {
-            b.WithOrigins("https://api-front-git-main-beth-codes-projects.vercel.app")
-                .AllowAnyHeader()
-                .AllowCredentials()
-                .AllowAnyMethod();
+            b.WithOrigins(
+                "https://api-front-git-main-beth-codes-projects.vercel.app", 
+                "http://127.0.0.1:5500"
+            )
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .AllowAnyMethod();
         });
 });
-
 
 builder.Services.AddSignalR();
 var app = builder.Build();
