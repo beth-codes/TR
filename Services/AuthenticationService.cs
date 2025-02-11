@@ -31,7 +31,7 @@ public class AuthenticationService : IAuthenticationService
         var userByUsername = await _userManager.FindByNameAsync(request.UserName);
         if (userByEmail is not null || userByUsername is not null)
         {
-            throw new ArgumentException($"User with email {request.Email} or username {request.UserName} already exists.");
+           return $"User with email {request.Email} or username {request.UserName} already exists.";
         }
 
         User user = new()
@@ -47,7 +47,7 @@ public class AuthenticationService : IAuthenticationService
 
         if(!result.Succeeded)
         {
-            throw new ArgumentException($"Unable to register user {request.UserName} errors: {GetErrorsText(result.Errors)}");
+           return $"Unable to register user {request.UserName} errors: {GetErrorsText(result.Errors)}";
         }
 
         return await Login(new LoginRequest { Username = request.Email, Password = request.Password });
