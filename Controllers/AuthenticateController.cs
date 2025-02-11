@@ -12,7 +12,7 @@ namespace PetProjectOne.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class UserController : BaseController
 {
     private readonly IAuthenticationService _authenticationService;
     private readonly IUserService _userServices;
@@ -43,7 +43,7 @@ public class UserController : ControllerBase
     {
         var response = await _authenticationService.Login(request);
 
-        return Ok(response);
+        return StatusCode(GetStatusCode(response.StatusCode), response);
     }
 
     [AllowAnonymous]

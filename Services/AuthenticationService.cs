@@ -6,6 +6,7 @@ using PetProjectOne.Entities;
 using PetProjectOne.Db;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using PetProjectOne.DTOs;
 
 namespace PetProjectOne.Services;
 
@@ -50,7 +51,7 @@ public class AuthenticationService : IAuthenticationService
            return $"Unable to register user {request.UserName} errors: {GetErrorsText(result.Errors)}";
         }
 
-        return await Login(new LoginRequest { Username = request.Email, Password = request.Password });
+        return "User created successfully";
     }
 
     public async Task<string> RegisterTasker(TaskerRegisterRequest request)
@@ -89,18 +90,13 @@ public class AuthenticationService : IAuthenticationService
 
 
     // login user
-    public async Task<string> Login(LoginRequest request)
+    public async Task<GenericResponse<LoginResponse>> Login(LoginRequest request)
     {
-        var user = await _userManager.FindByNameAsync(request.Username);
-
-        if(user is null)
-        {
-            user = await _userManager.FindByEmailAsync(request.Username);
-        }
+        var user = await _userManager.FindByNameAsync(request.UsernameOrEmail) ?? await _userManager.FindByEmailAsync(request.UsernameOrEmail);
 
         if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password))
         {
-            throw new ArgumentException($"Unable to authenticate user {request.Username}");
+            return GenericResponse<LoginResponse>.Failed("Invalid credentials",400);
         }
 
         var authClaims = new List<Claim>
@@ -112,8 +108,12 @@ public class AuthenticationService : IAuthenticationService
         };
 
         var token = GetToken(authClaims);
+        
+        var returnedToken =  new JwtSecurityTokenHandler().WriteToken(token);
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        var loginResponse = new LoginResponse(user.Id, user.FullName, user.Email, user.UserName, returnedToken);
+
+        return GenericResponse<LoginResponse>.Success("Successfully logged in", loginResponse);
     }
 
     // autorization
