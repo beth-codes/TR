@@ -5423,25 +5423,25 @@
     ]
   },
   "packageFolders": {
-    "/Users/admin/.nuget/packages/": {}
+    "C:\\Users\\Emmanuel.Imion\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/admin/PetProjectOne/PetProjectOne.csproj",
+      "projectUniqueName": "C:\\Users\\Emmanuel.Imion\\Documents\\TR\\PetProjectOne.csproj",
       "projectName": "PetProjectOne",
-      "projectPath": "/Users/admin/PetProjectOne/PetProjectOne.csproj",
-      "packagesPath": "/Users/admin/.nuget/packages/",
-      "outputPath": "/Users/admin/PetProjectOne/obj/",
+      "projectPath": "C:\\Users\\Emmanuel.Imion\\Documents\\TR\\PetProjectOne.csproj",
+      "packagesPath": "C:\\Users\\Emmanuel.Imion\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Emmanuel.Imion\\Documents\\TR\\obj\\",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "/Users/admin/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Emmanuel.Imion\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5539,7 +5539,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
