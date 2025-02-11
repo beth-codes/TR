@@ -14,6 +14,7 @@ namespace PetProjectOne.Controllers
                 400 => StatusCodes.Status400BadRequest,
                 401 => StatusCodes.Status401Unauthorized,
                 404 => StatusCodes.Status404NotFound,
+                409 => StatusCodes.Status409Conflict,
                 _ => StatusCodes.Status500InternalServerError
             };
         }

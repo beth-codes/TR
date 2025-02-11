@@ -26,13 +26,13 @@ public class AuthenticationService : IAuthenticationService
     }
 
     // Register User
-    public async Task<string> Register(RegisterRequest request)
+    public async Task<GenericResponse<string>> Register(RegisterRequest request)
     {
         var userByEmail = await _userManager.FindByEmailAsync(request.Email);
         var userByUsername = await _userManager.FindByNameAsync(request.UserName);
         if (userByEmail is not null || userByUsername is not null)
         {
-           return $"User with email {request.Email} or username {request.UserName} already exists.";
+            return GenericResponse<string>.Failed("User already exists, please log in.", 409);
         }
 
         User user = new()
@@ -48,13 +48,13 @@ public class AuthenticationService : IAuthenticationService
 
         if(!result.Succeeded)
         {
-           return $"Unable to register user {request.UserName} errors: {GetErrorsText(result.Errors)}";
+            return GenericResponse<string>.Failed("Password must contain at least 6 characters; 1 uppercase, 1 special character, and 1 number.", 409);
         }
 
-        return "User created successfully";
+        return GenericResponse<string>.Success("User created successfully", "");
     }
 
-    public async Task<string> RegisterTasker(TaskerRegisterRequest request)
+    public async Task<GenericResponse<string>> RegisterTasker(TaskerRegisterRequest request)
     {
         var user = new User
         {
@@ -66,8 +66,10 @@ public class AuthenticationService : IAuthenticationService
 
         var result = await _userManager.CreateAsync(user, request.Password);
 
-        if (!result.Succeeded)
-            return string.Join(", ", result.Errors.Select(e => e.Description));
+         if(!result.Succeeded)
+        {
+            return GenericResponse<string>.Failed("Password must contain at least 6 characters; 1 uppercase, 1 special character, and 1 number.", 409);
+        }
 
         // Assign "Tasker" role
         await _userManager.AddToRoleAsync(user, "MemberTasker");
@@ -85,7 +87,7 @@ public class AuthenticationService : IAuthenticationService
         _dbContext.TaskerProfiles.Add(taskerProfile);
         await _dbContext.SaveChangesAsync();
 
-        return "Tasker registered successfully!";
+        return GenericResponse<string>.Success("Tasker created successfully!", "");
     }
 
 
@@ -111,7 +113,7 @@ public class AuthenticationService : IAuthenticationService
         
         var returnedToken =  new JwtSecurityTokenHandler().WriteToken(token);
 
-        var loginResponse = new LoginResponse(user.Id, user.FullName, user.Email, user.UserName, returnedToken);
+        var loginResponse = new LoginResponse(user.Id, user.FullName, user.Email, user.UserName, user.IsTasker, returnedToken);
 
         return GenericResponse<LoginResponse>.Success("Successfully logged in", loginResponse);
     }
@@ -130,11 +132,4 @@ public class AuthenticationService : IAuthenticationService
 
         return token;
     }
-
-    private string GetErrorsText(IEnumerable<IdentityError> errors)
-    {
-        return string.Join(", ", errors.Select(error => error.Description).ToArray());
-    }
-
-
 }

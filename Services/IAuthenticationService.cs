@@ -6,7 +6,7 @@ namespace PetProjectOne.Services;
 
 public interface IAuthenticationService
 {
-    Task<string> Register(RegisterRequest request);
-    Task<string> RegisterTasker(TaskerRegisterRequest request);
+    Task<GenericResponse<string>> Register(RegisterRequest request);
+    Task<GenericResponse<string>> RegisterTasker(TaskerRegisterRequest request);
     Task<GenericResponse<LoginResponse>> Login(LoginRequest request);
 }
