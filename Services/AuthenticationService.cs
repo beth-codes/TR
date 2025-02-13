@@ -56,6 +56,13 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<GenericResponse<string>> RegisterTasker(TaskerRegisterRequest request)
     {
+
+         var userByEmail = await _userManager.FindByEmailAsync(request.Email);
+        var userByUsername = await _userManager.FindByNameAsync(request.UserName);
+        if (userByEmail is not null || userByUsername is not null)
+        {
+            return GenericResponse<string>.Failed("User already exists, please log in.", 409);
+        }
         var user = new User
         {
             UserName = request.UserName,
